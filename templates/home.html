@@ -1,0 +1,295 @@
+{% extends "layout.html"%}
+
+{% block content %}
+<style>
+  table#tabla2, td#tabla2, tr#tabla2{
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  </style>
+
+
+<body>
+  <table>
+    <tr>
+
+      <td>
+        <form action="/opciongrafo" method="POST">
+          <p>Tipo de Grafo:
+            <select name="tipodegrafo" value="tipodegrafo" class="selectpicker form-control">
+              <option name="normal" value="normal">Grafo</option>
+              <option name ="dirigido" value="dirigido">Dirigido</option>
+              <option name ="Multigrafo" value="Multigrafo">Multigrafo</option>
+              <option name="Multidigrafo" value="Multidigrafo">Multidigrafo</option>
+              <p><input type="submit" value="Enviar"></p>
+        </select>
+        </p>
+        </form>
+      </td>
+      
+      
+    </tr>
+    <tr>
+
+      <td>
+        <form action="/formulario" method="POST">
+          <section id="AgregarNodo/vertces" style="display: none">
+            <p>Nombre de nodos        <input type="text" name="nomnodo" /></p>
+            <p>Añadir vertice inicial <input type="text" name="vertini" /></p>
+            <p>Añadir vertice final   <input type="text" name="vertfin" /></p>
+            <p><input type="submit" value="Enviar" class="btn btn-dark my-3" /></p>
+          </section>
+          <input
+            type="button"
+            id="boton"
+            value="Añadir Nodos y Vertices"
+            onclick="Mostrar_ocultar()"                         
+           />
+           <!-- Se manda a llamar a la funcion (linea 47)-->
+        </form>
+      </td>
+      
+      
+    </tr>
+        <tr>
+
+          <td>
+        <form action="/eliminarnodo" method="POST">
+          <section id="EliminarNodos" style="display: none">
+            <p>Nombre de nodo a eliminar <input type="text" name="nomnodoelim" /></p>
+            <p><input type="submit" value="Enviar" class="btn btn-dark my-3" /></p>
+          </section>
+          <input
+            type="button"
+            id="boton2"
+            value="Eliminar nodos"
+            onclick="Mostrar_ocultar2()"
+          />
+        </form>
+      </td>
+      
+      
+    </tr>
+        <tr>
+
+          <td>
+        <section id="Info" style="display: none">
+          <form action="/grafointeractivo" method="POST">
+            <input
+              type="submit"
+              value="Ver grafo interactivo"
+              class="btn btn-dark my-3"
+            />
+          </form>
+        
+          <form action="/eliminargrafo" method="POST">
+            <input type="submit" value="Eliminar grafo" class="btn btn-dark my-3" />
+          </form>
+        
+          
+          <form action="/verinformacion" method="POST">
+            <input
+              type="submit"
+              value="Ver informacion del grafo"
+              class="btn btn-dark my-3"
+            />
+          </form>
+
+
+          <form action="/nregion" method="POST">
+            <input
+              type="submit"
+              value="Ver El Numero de Regiones"
+              class="btn btn-dark my-3"
+            />
+          </form>
+
+
+        </section>
+        <input
+          type="button"
+          id="boton3"
+          value="Informacion del Grafo"
+          onclick="Mostrar_ocultar3()"
+        />
+      </td>
+      
+      
+    </tr>
+        <tr>
+
+          <td>
+        <section id="EliArist" style="display: none;">
+          <form action="/eliminararista" method="POST">
+            <p>Vertice inicial  <input type="text" name="vertini" /></p>
+            <p>Vertice final    <input type="text" name="vertfin" /></p>
+            <input type="submit" value="Eliminar" class="btn btn-dark my-3"/>
+          </form>
+        </section>
+        <input
+        type="button"
+        id="boton6"
+        value="Eliminar Aristas"
+        onclick="Mostrar_ocultar6()"
+        />
+      </td>
+      
+      
+    </tr>
+        <tr>
+
+          <td>
+        <form action="/colorear" method="POST">
+          <input type="submit" value="Colorear grafico" />
+        </form>
+      </td>
+      
+      
+    </tr>
+          
+        <tr>
+
+          <td>
+        <section id="Ponderar" style="display: none">
+          <form action="/ponderacion" method="POST">
+          
+              <p>Vertice inicial   <input type="text" name="vertini" /></p>
+              <p>Vertice final     <input type="text" name="vertfin" /></p>
+              <p>Peso de la arista <input type="text" name="peso" /></p>
+              <input type="submit" value="enviar" class="btn btn-dark my-3"/>
+          </form>
+        </td>
+      
+      
+      </tr>
+
+          <tr>
+
+            <td>
+        </section>
+          <input
+          type="button"
+          id="boton4"
+          value="Ponderar"
+          onclick="Mostrar_ocultar4()"
+          />
+        </td>
+      
+      
+      </tr>
+      <tr>
+
+        <td>
+
+          <section id="Iso" style="display: none;">  
+            <form action="/isomorfo" method="POST">
+              <h1>Ingrese un 2do Grafo</h1>
+              <p>Nombre de nodo         <input type="text" name="nomnodo" /></p>
+              <p>Añadir vertice inicial <input type="text" name="vertini" /></p>
+              <p>Añadir vertice final   <input type="text" name="vertfin" /></p>
+              <input type="submit" value="Enviar" class="btn btn-dark my-3"/>
+            </form>
+          </section>
+          <input
+            type="button"
+            id="boton5"
+            value="¿Es isomorfo?"
+            onclick="Mostrar_ocultar5()"
+          />
+        </td>
+      
+      
+      </tr>
+          <tr>
+
+        <td>
+          
+          <section id="Dijkstra" style="display:none;">
+            <form action="/dijkstra" method="POST">
+              <label >Obtener ruta mas corta entre dos vertices</label>
+              <p>Añadir vertice inicial GRAFO 1: <input type="text" name="vertini" ></p>
+              <p>Añadir vertice final GRAFO 1:   <input type="text" name="vertfin" ></p>
+              <p>Añadir vertice inicial GRAFO 2: <input type="text" name="vertini2" ></p>
+              <p>Añadir vertice final GRAFO 2:   <input type="text" name="vertfin2" ></p>
+              <input type="submit" value="Enviar" class="btn btn-dark my-3">
+            </form>
+          </section>
+          <input
+            type="button"
+            id="boton7"
+            value="Dijkstra"
+            onclick="Mostrar_ocultar7()"
+          />
+        </td>
+      
+      
+      </tr>
+        
+     
+
+
+        <tr>
+          <td>
+            <form action="/ncromatico" method="POST">
+              <p><input type="submit" value="Calcular el Numero Cromatico"></p>
+            </form>
+          </td>
+        </tr>
+
+          </table>
+
+        <tr>
+            <td>
+                <form action="/caminosSimples" method="POST">
+                <p>Vertice inicial<input type="text" name="vertini" /></p>
+                <p>Vertice final<input type="text" name="vertfin" /></p>
+                <input type="submit" value="enviar" class="btn btn-dark my-3"/>
+          </form>
+            </td>
+        </tr>
+          
+
+          
+          <table border="1"  id="tabla2">
+    
+          
+            <tr id="tabla2"><td id="tabla2"><strong>informacion grafo </strong></td><td id="tabla2">Grafo 1</td><td id="tabla2">Grafo 2</td></tr>
+           
+            <tr id="tabla2"><td id="tabla2"><strong>El tipo de grafo es: </strong></td><td>{{tipodelgrafo}}</td><td id="tabla2">{{tipodelgrafo2}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong>El numero de nodos es: </strong></td><td>{{numerodenodos}}</td><td id="tabla2">{{numerodenodos2}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong>El numero de aristas es: </strong></td><td>{{numeroaristas}}</td><td id="tabla2">{{numeroaristas2}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong>El tipo de grafo es:</strong></td><td>{{tipodelgrafo}}</td><td id="tabla2">{{tipodelgrafo2}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong> El grafo es conexo:</strong></td><td>{{avisografo}}</td><td id="tabla2">{{avisografo2}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong> El grafo es ponderado: </strong></td><td>{{textoponderado}}</td><td id="tabla2">{{textoponderado2}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong>La matriz de adyacencia es: </strong></td><td>{{matrizcopia2}}</td><td id="tabla2">{{matrizcopia3}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong>La matriz de caminos es: </strong></td><td>{{matrizcamino}}</td><td id="tabla2">{{matrizcamino2}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong>El grafo es plano: </strong></td><td>{{plano}}</td><td id="tabla2">{{plano2}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong>El grafo es regular: </strong></td><td>{{regular}}</td><td id="tabla2">{{regular2}}</td></tr>
+
+            <tr id="tabla2"><td id="tabla2"><strong>Los grafos son isomorfos: </strong></td><td>{{avisoisomorfo}}</td></tr>
+          
+            <tr id="tabla2"><td id="tabla2"><strong>La ruta mas corta es: </strong></td><td>{{rutacorta}}</td><td id="tabla2">{{rutacorta2}}</td></tr>
+            <tr id="tabla2"><td id="tabla2"><strong>Caminos Simples:  </strong></td><td id="tabla2">{{caminoSimple}}</td></tr>
+            <tr id="tabla2"><td id="tabla2"><strong>Camino Euleriano:  </strong></td><td id="tabla2">{{caminoEuleriano}}</td></tr>
+            <tr id="tabla2"><td id="tabla2"><strong>Camino Hamiltoniano:</strong></td> <td id="tabla2">{{caminoHamiltoniano}}</td></tr>
+            <tr id="tabla2"><td id="tabla2"><strong>Número cromatico:</strong></td> <td id="tabla2">{{cromatico}}</td></tr>
+            <tr id="tabla2"><td id="tabla2"> <strong>Número De Regiones:</strong></td> <td id="tabla2">{{Numeroregiones}}</td></tr>
+        </table>
+          
+</body>
+
+<!--<img src="phttps://s3-us-west-2.amazonaws.com/devcodepro/media/blog/por-que-tener-una-pagina-web.png" alt="prueba" height="200" width="500" />
+
+-->
+{% endblock %}
+

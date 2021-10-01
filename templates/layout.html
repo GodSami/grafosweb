@@ -1,0 +1,133 @@
+<html>
+<title>Web de grafos</title>
+
+<head>
+    <!--Javascript-->
+    <script type="text/javascript"> 
+
+        function Mostrar_ocultar() {
+          let ejemplo = document.getElementById('AgregarNodo/vertces');                 // se genera una variable, a la cual se le iguala la id de donde se llama a la funcion
+  
+          if (ejemplo.style.display === 'none') {                  // consultamos si de donde se llama la funcion esta mostrando o no su contenido en pantalla
+            document.getElementById('AgregarNodo/vertces').style.display = 'block'; //Si es asi, al boton se le da la capacidad de ocultar el contenido
+            document.getElementById('boton').value = 'Ocultar'; // Se le cambia el texto al boton para que se sepa que ahora se puede ocultar el contenido
+          } else {
+            document.getElementById('AgregarNodo/vertces').style.display = 'none';   //Si no es asi, al boton se le da la capacidad de mostrar el contenido
+            document.getElementById('boton').value = 'Añadir Nodos y Vertices';  // Se le cambia el texto al boton para que se sepa que ahora se puede Mostrar el contenido
+          }
+        }
+  
+        function Mostrar_ocultar2() {
+          let ejemplo = document.getElementById('EliminarNodos');
+  
+          if (ejemplo.style.display === 'none') {
+            document.getElementById('EliminarNodos').style.display = 'block';
+            document.getElementById('boton2').value = 'Ocultar';
+          } else {
+            document.getElementById('EliminarNodos').style.display = 'none';
+            document.getElementById('boton2').value = 'Eliminar Nodos';
+          }
+        }
+  
+        function Mostrar_ocultar3() {
+          let ejemplo = document.getElementById('Info');
+  
+          if (ejemplo.style.display === 'none') {
+            document.getElementById('Info').style.display = 'block';
+            document.getElementById('boton3').value = 'Ocultar';
+          } else {
+            document.getElementById('Info').style.display = 'none';
+            document.getElementById('boton3').value = 'Informacion del Grafo';
+          }
+        }
+  
+        function Mostrar_ocultar4() {
+          let ejemplo = document.getElementById('Ponderar');
+  
+          if (ejemplo.style.display === 'none') {
+            document.getElementById('Ponderar').style.display = 'block';
+            document.getElementById('boton4').value = 'Ocultar';
+          } else {
+            document.getElementById('Ponderar').style.display = 'none';
+            document.getElementById('boton4').value = 'Ponderar';
+          }
+        }
+        function Mostrar_ocultar5() {
+          let ejemplo = document.getElementById('Iso');
+  
+          if (ejemplo.style.display === 'none') {
+            document.getElementById('Iso').style.display = 'block';
+            document.getElementById('boton5').value = 'Ocultar';
+          } else {
+            document.getElementById('Iso').style.display = 'none';
+            document.getElementById('boton5').value = '¿Es isomorfo?';
+          }
+        }
+  
+        function Mostrar_ocultar6() {
+          let ejemplo = document.getElementById('EliArist');
+  
+          if (ejemplo.style.display === 'none') {
+            document.getElementById('EliArist').style.display = 'block';
+            document.getElementById('boton6').value = 'Ocultar';
+          } else {
+            document.getElementById('EliArist').style.display = 'none';
+            document.getElementById('boton6').value = 'Eliminar Aristas';
+          }
+        }
+
+        function Mostrar_ocultar7() {
+          let ejemplo = document.getElementById('Dijkstra');
+  
+          if (ejemplo.style.display === 'none') {
+            document.getElementById('Dijkstra').style.display = 'block';
+            document.getElementById('boton7').value = 'Ocultar';
+          } else {
+            document.getElementById('Dijkstra').style.display = 'none';
+            document.getElementById('boton7').value = 'Dijjstra';
+          }
+        }
+  
+      </script>
+
+<!--bootstrap 4>-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<!--css>-->
+<link rel="stylesheet" href="{{url_for('static', filename='css/main.css') }}">
+
+</head>
+<body>
+    <h1>Aplicacion web de grafos </h1>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Documentacion</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <!--<a class="nav-link" href="{{ url_for('about')}}">about</a>-->
+                    <a class="nav-link" href="https://www.youtube.com/watch?v=ijn-RQS29-s">about</a>
+                  </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" p-4>
+
+    {% block content %}
+    
+    {% endblock %}
+</div> 
+
+</body>
+
+</html>
